@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia sobre DMZ, CGNAT e IP Fixo - Brisanet</title>
+    <!-- Carregando Tailwind CSS para estilo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carregando a fonte Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Aplicando a fonte Inter como padrão */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para destacar texto com a cor da marca */
+        strong {
+            font-weight: 600;
+            color: #F97316; /* Tailwind 'orange-600' */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+
+    <!-- Cabeçalho com cor da marca Brisanet -->
+    <header class="bg-orange-600 p-8 shadow-lg"> <!-- Cor principal da marca -->
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-3xl font-bold text-white mb-2">Por que não consigo configurar DMZ no Roteador Brisanet?</h1>
+            <p class="text-lg text-orange-100">Guia completo para atendentes de suporte</p>
+        </div>
+    </header>
+
+    <!-- Container Principal -->
+    <main class="max-w-4xl mx-auto p-4 md:p-8 space-y-6">
+
+        <!-- Seção: O Problema Imediato -->
+        <section class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="flex items-center p-5 border-b border-gray-200">
+                <!-- Ícone de Aviso (Cor Vermelha) -->
+                <svg class="w-8 h-8 text-red-600 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.01" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-900">Problema 1: O Roteador Brisanet</h2>
+            </div>
+            <div class="p-6">
+                <p class="text-gray-700 text-lg">
+                    O roteador fornecido pela Brisanet vem <strong>pré-configurado e bloqueado</strong> por questões de segurança e para garantir a estabilidade da rede. Funções avançadas como <strong>DMZ (Demilitarized Zone)</strong>, que expõem um dispositivo diretamente à internet, não estão acessíveis para o usuário final.
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção: O que é DMZ? -->
+        <section class="bg-blue-50 border border-blue-200 rounded-lg p-5 flex items-start">
+            <!-- Ícone de Informação -->
+            <svg class="w-7 h-7 text-blue-600 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            </svg>
+            <div>
+                <h3 class="text-xl font-semibold text-blue-800 mb-2">O que é DMZ?</h3>
+                <p class="text-blue-700">
+                    DMZ é uma configuração que abre <strong>todas as portas</strong> de rede para um dispositivo específico (ex: um console de videogame ou um servidor). Embora resolva problemas de conexão, é um <strong>risco de segurança</strong>, pois deixa o dispositivo totalmente exposto a ataques da internet.
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção: O Problema Maior (CGNAT) -->
+        <section class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="flex items-center p-5 border-b border-gray-200">
+                <!-- Ícone de Aviso (Cor Vermelha) -->
+                <svg class="w-8 h-8 text-red-600 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.01" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-900">Problema 2: A Rede CGNAT (Questão de Segurança)</h2>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-gray-700 text-lg">
+                    Mesmo que o cliente tivesse um roteador particular, o DMZ não funcionaria. Por padrão, os clientes Brisanet estão em uma rede <strong>CGNAT (Carrier-Grade NAT)</strong>.
+                </p>
+                <p class="text-gray-700 text-lg">
+                    Isso significa que você <strong>divide o mesmo endereço de IP público</strong> com vários outros clientes. É como morar em um prédio onde todos os apartamentos usam o mesmo endereço para correspondência.
+                </p>
+                <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
+                    <h4 class="font-bold">Por que isso impede o DMZ? (Risco de Segurança)</h4>
+                    <p>Se a Brisanet permitisse que um cliente ativasse o DMZ no CGNAT, ele estaria abrindo as portas de internet <strong>para todos os outros clientes</strong> que compartilham aquele IP.</p>
+                    <p class="mt-2">Isso seria uma falha de segurança grave, expondo as redes de dezenas de clientes a ataques, mesmo que eles não tenham solicitado o DMZ. <strong>Proteger outros clientes é a nossa prioridade.</strong></p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção: Soluções Disponíveis -->
+        <section class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="flex items-center p-5 border-b border-gray-200 bg-gray-50">
+                <!-- Ícone de Check (Azul) -->
+                <svg class="w-8 h-8 text-blue-600 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-900">A Solução Correta (Requisitos para DMZ)</h2>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+                <!-- Opção 1 -->
+                <div class="p-6">
+                    <div class="flex items-start mb-3">
+                        <!-- Ícone de IP -->
+                        <svg class="w-7 h-7 text-blue-600 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-gray-900">Requisito 1: Contratar um IP Fixo</h3>
+                    </div>
+                    <div class="pl-11 text-gray-700 space-y-2">
+                        <p>O cliente deve primeiro solicitar ao setor comercial a contratação de um <strong>IP Fixo (IP Público)</strong>. Este IP será <strong>exclusivo</strong> para a conexão dele.</p>
+                        <p><strong>Vantagem de Segurança:</strong> Com um IP Fixo, o cliente sai do CGNAT. Agora, qualquer configuração de DMZ ou abertura de porta afeta <strong>apenas a rede do próprio cliente</strong>. O risco é isolado e de responsabilidade total do usuário, sem prejudicar mais ninguém.</p>
+                    </div>
+                </div>
+
+                <!-- Opção 2 -->
+                <div class="p-6">
+                    <div class="flex items-start mb-3">
+                        <!-- Ícone de Roteador/WiFi -->
+                        <svg class="w-7 h-7 text-blue-600 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3m-13.5 0v1.5a3 3 0 0 0 3 3h7.5a3 3 0 0 0 3-3v-1.5m-13.5 0h13.5" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-gray-900">Requisito 2: Usar um Roteador Particular</h3>
+                    </div>
+                    <div class="pl-11 text-gray-700 space-y-2">
+                        <p>Após o IP Fixo estar ativo, o cliente precisará <strong>substituir o roteador Brisanet</strong> por um roteador particular de sua escolha (TP-Link, Intelbras, etc.).</p>
+                        <ul class="list-disc list-outside pl-5 space-y-1">
+                            <li>O roteador particular deve ser conectado na <strong>ONT</strong> (modem da fibra).</li>
+                            <li>A internet deve ser configurada no modo <strong>PPPoE</strong> (o cliente deve inserir o usuário e senha fornecidos pela Brisanet).</li>
+                            <li>O cliente terá <strong>acesso total</strong> às configurações do seu roteador para ativar o DMZ.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Resumo Técnico -->
+        <section class="bg-gray-200 border border-gray-300 rounded-lg p-5 flex items-start">
+            <!-- Ícone de Resumo/Documento -->
+            <svg class="w-7 h-7 text-gray-600 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h.01M15 12h.01M10.86 19.5H18a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 18 4.5H6A2.25 2.25 0 0 0 3.75 6.75v10.5A2.25 2.25 0 0 0 6 19.5h4.86M12 14.25v-2.625c0-.621-.504-1.125-1.125-1.125H10.875c-.621 0-1.125.504-1.125 1.125v2.625M12 14.25h0v-2.625c0-.621.504-1.125 1.125-1.125h1.125c.621 0 1.125.504 1.125 1.125v2.625h0M12 14.25v2.625m0-2.625v-2.625" />
+            </svg>
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Resumo Técnico (Para o Atendente):</h3>
+                <p class="text-gray-700">
+                    DMZ é impossível em CGNAT por ser um IP compartilhado (risco de segurança para outros clientes). A solução exige <strong>IP Fixo</strong> (para isolar o risco apenas no cliente) + <strong>Roteador Particular</strong> (pois o da Brisanet é bloqueado e não permite essa configuração).
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-800 text-white p-10 text-center mt-10">
+        <h3 class="text-2xl font-bold mb-4">Dúvidas:</h3>
+        <p class="text-lg text-gray-300 mb-4">
+            Contato: (84) 999593409 | alison.braga@grupobrisanet.com.br
+        </p>
+        <p class="text-sm text-gray-400">
+            © 2025 Alison Braga da Silva
+        </p>
+    </footer>
+
+</body>
+</html>
