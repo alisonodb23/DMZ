@@ -28,7 +28,7 @@
     <header class="bg-orange-600 p-8 shadow-lg"> <!-- Cor principal da marca -->
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-3xl font-bold text-white mb-2">Por que não consigo configurar DMZ no Roteador Brisanet?</h1>
-            <p class="text-lg text-orange-100">Guia completo para atendentes de suporte</p>
+            <p class="text-lg text-orange-100">Guia para atendimento do suporte técnico fibra</p>
         </div>
     </header>
 
@@ -64,6 +64,20 @@
                 </p>
             </div>
         </section>
+        
+        <!-- Seção: O que é CGNAT? (Nova Seção) -->
+        <section class="bg-blue-50 border border-blue-200 rounded-lg p-5 flex items-start">
+            <!-- Ícone de Informação -->
+            <svg class="w-7 h-7 text-blue-600 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.75 9.75 0 1 1 0-19.5 9.75 9.75 0 0 1 0 19.5Zm-3-8.25L12 15l3-2.25M9 9l3 2.25L15 9" />
+            </svg>
+            <div>
+                <h3 class="text-xl font-semibold text-blue-800 mb-2">O que é CGNAT?</h3>
+                <p class="text-blue-700">
+                   <strong>CGNAT (Carrier-Grade NAT)</strong> é uma tecnologia que permite que vários clientes <strong>compartilhem o mesmo endereço de IP público</strong>. É como um prédio de apartamentos onde todos recebem correspondência no mesmo endereço principal (o IP público), e o porteiro (roteador da Brisanet) distribui para o apartamento correto (o cliente).
+                </p>
+            </div>
+        </section>
 
         <!-- Seção: O Problema Maior (CGNAT) -->
         <section class="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -72,18 +86,15 @@
                 <svg class="w-8 h-8 text-red-600 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.01" />
                 </svg>
-                <h2 class="text-2xl font-semibold text-gray-900">Problema 2: A Rede CGNAT (Questão de Segurança)</h2>
+                <h2 class="text-2xl font-semibold text-gray-900">Problema 2: A Segurança da Rede CGNAT</h2>
             </div>
             <div class="p-6 space-y-4">
                 <p class="text-gray-700 text-lg">
-                    Mesmo que o cliente tivesse um roteador particular, o DMZ não funcionaria. Por padrão, os clientes Brisanet estão em uma rede <strong>CGNAT (Carrier-Grade NAT)</strong>.
-                </p>
-                <p class="text-gray-700 text-lg">
-                    Isso significa que você <strong>divide o mesmo endereço de IP público</strong> com vários outros clientes. É como morar em um prédio onde todos os apartamentos usam o mesmo endereço para correspondência.
+                    Mesmo que o cliente tivesse um roteador particular, o DMZ não funcionaria na rede padrão por causa do <strong>CGNAT</strong>.
                 </p>
                 <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
-                    <h4 class="font-bold">Por que isso impede o DMZ? (Risco de Segurança)</h4>
-                    <p>Se a Brisanet permitisse que um cliente ativasse o DMZ no CGNAT, ele estaria abrindo as portas de internet <strong>para todos os outros clientes</strong> que compartilham aquele IP.</p>
+                    <h4 class="font-bold">Por que o CGNAT impede o DMZ? (Risco de Segurança)</h4>
+                    <p>Como vários clientes compartilham o mesmo IP, se a Brisanet permitisse que um cliente ativasse o DMZ, ele estaria abrindo as portas de internet <strong>para todos os outros clientes</strong> que usam aquele IP.</p>
                     <p class="mt-2">Isso seria uma falha de segurança grave, expondo as redes de dezenas de clientes a ataques, mesmo que eles não tenham solicitado o DMZ. <strong>Proteger outros clientes é a nossa prioridade.</strong></p>
                 </div>
             </div>
@@ -137,6 +148,49 @@
             </div>
         </section>
 
+        <!-- NOVA SEÇÃO: Alternativa Recomendada -->
+        <section class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="flex items-center p-5 border-b border-gray-200 bg-gray-50">
+                <!-- Ícone de Escudo/Segurança -->
+                <svg class="w-8 h-8 text-green-600 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.602-3.751A11.959 11.959 0 0 1 12 2.714Z" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-900">Alternativa Recomendada (Mais Segura)</h2>
+            </div>
+            <div class="p-6 space-y-4">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Redirecionamento de Portas (Port Forwarding)</h3>
+                <p class="text-gray-700 text-lg">
+                    Oriente o cliente que, na maioria dos casos (jogos, câmeras, servidores), ele <strong>não precisa de DMZ</strong>. O que ele realmente precisa é do <strong>Redirecionamento de Portas</strong>.
+                </p>
+                <ul class="list-disc list-outside pl-5 space-y-2 text-gray-700">
+                    <li>Essa função também exige <strong>IP Fixo + Roteador Particular</strong>.</li>
+                    <li><strong>Diferença Chave:</strong> Em vez de abrir *todas* as portas (DMZ), o cliente abre *apenas* as portas específicas que o jogo ou serviço precisa (ex: Porta 3074 para Call of Duty).</li>
+                    <li>É <strong>infinitamente mais seguro</strong> que o DMZ, pois mantém o resto do dispositivo protegido.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- NOVA SEÇÃO: Guia para Atendente -->
+        <section class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="flex items-center p-5 border-b border-gray-200 bg-gray-50">
+                <!-- Ícone de Tutorial/Clipboard -->
+                <svg class="w-8 h-8 text-blue-600 mr-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-900">Guia Rápido para o Atendente</h2>
+            </div>
+            <div class="p-6">
+                <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                    <li><strong>Entenda a Solicitação:</strong> Cliente pede DMZ. Pergunte *para qual finalidade* (jogo, câmera, etc.).</li>
+                    <li><strong>Explique o Roteador:</strong> Informe que o roteador Brisanet é bloqueado por segurança e não permite DMZ.</li>
+                    <li><strong>Explique o CGNAT:</strong> Informe que, mesmo com outro roteador, o DMZ não funcionará na rede padrão (CGNAT), pois isso colocaria *outros clientes em risco*.</li>
+                    <li><strong>Ofereça a Solução (IP Fixo):</strong> A única solução é contratar um <strong>IP Fixo</strong> (via setor comercial). Isso o remove do CGNAT e isola o risco.</li>
+                    <li><strong>Mencione os Requisitos:</strong> Confirme que, após ter o IP Fixo, ele precisará de um <strong>roteador particular</strong> e configurá-lo com usuário e senha <strong>PPPoE</strong>.</li>
+                    <li><strong>Sugira a Alternativa:</strong> Recomende fortemente que, em vez de DMZ, ele use <strong>Redirecionamento de Portas</strong> no roteador particular, por ser muito mais seguro.</li>
+                </ol>
+            </div>
+        </section>
+
         <!-- Seção: Resumo Técnico -->
         <section class="bg-gray-200 border border-gray-300 rounded-lg p-5 flex items-start">
             <!-- Ícone de Resumo/Documento -->
@@ -146,7 +200,7 @@
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 mb-2">Resumo Técnico (Para o Atendente):</h3>
                 <p class="text-gray-700">
-                    DMZ é impossível em CGNAT por ser um IP compartilhado (risco de segurança para outros clientes). A solução exige <strong>IP Fixo</strong> (para isolar o risco apenas no cliente) + <strong>Roteador Particular</strong> (pois o da Brisanet é bloqueado e não permite essa configuração).
+                    DMZ/Port Forwarding é impossível em CGNAT (IP compartilhado, risco de segurança). A solução exige <strong>IP Fixo</strong> (isola o risco) + <strong>Roteador Particular</strong> (permite a configuração via PPPoE). Recomendar Port Forwarding ao invés de DMZ.
                 </p>
             </div>
         </section>
